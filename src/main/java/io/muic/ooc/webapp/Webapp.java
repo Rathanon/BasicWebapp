@@ -27,6 +27,9 @@ public class Webapp {
             Tomcat.addServlet(ctx, LoginServlet.class.getSimpleName(), loginServlet);
             ctx.addServletMapping("/login", LoginServlet.class.getSimpleName());
 
+            LogoutServlet logoutServlet = new LogoutServlet();
+            Tomcat.addServlet(ctx, LogoutServlet.class.getSimpleName(), logoutServlet);
+            ctx.addServletMapping("/logout", LogoutServlet.class.getSimpleName());
 
             tomcat.start();
             tomcat.getServer().await();
