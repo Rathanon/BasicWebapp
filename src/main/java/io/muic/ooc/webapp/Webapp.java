@@ -15,18 +15,17 @@ public class Webapp {
         File docBase = new File("src/main/webapp/");
         docBase.mkdirs();
 
-
         try {
             Context ctx = tomcat.addWebapp("", docBase.getAbsolutePath());
 
             HomeServlet homeServlet = new HomeServlet();
-            Tomcat.addServlet(ctx, "HomeServlet", homeServlet);
+            Tomcat.addServlet(ctx, HomeServlet.class.getSimpleName() , homeServlet);
             // TRICK: mapping with index.jsp, allow access to root path "/"
-            ctx.addServletMapping("/index.jsp", "HomeServlet");
-//
-//            AdminServlet adminServlet = new AdminServlet();
-//            Tomcat.addServlet(ctx, "AdminServlet", adminServlet);
-//            ctx.addServletMapping("/admin", "AdminServlet");
+            ctx.addServletMapping("/index.jsp", HomeServlet.class.getSimpleName());
+
+            LoginServlet loginServlet = new LoginServlet();
+            Tomcat.addServlet(ctx, LoginServlet.class.getSimpleName(), loginServlet);
+            ctx.addServletMapping("/login", LoginServlet.class.getSimpleName());
 
 
             tomcat.start();
