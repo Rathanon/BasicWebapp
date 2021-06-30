@@ -8,11 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-/**
- *
- * @author gigadot
- */
-public class LoginServlet extends HttpServlet {
+public class LoginServlet extends AbstractRoutableHttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -43,4 +39,8 @@ public class LoginServlet extends HttpServlet {
     }
 
 
+    @Override
+    public String getPattern() {
+        return "/login";
+    }
 }

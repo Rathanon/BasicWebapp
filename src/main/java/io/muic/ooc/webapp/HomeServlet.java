@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class HomeServlet extends HttpServlet {
+public class HomeServlet extends AbstractRoutableHttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,5 +25,10 @@ public class HomeServlet extends HttpServlet {
         }else{
             response.sendRedirect("/login");
         }
+    }
+
+    @Override
+    public String getPattern() {
+        return "/index.jsp";
     }
 }
