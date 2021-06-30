@@ -1,16 +1,19 @@
-package io.muic.ooc.webapp;
+package io.muic.ooc.webapp.servlets;
 
+import io.muic.ooc.webapp.servlets.AbstractRoutableHttpServlet;
+import io.muic.ooc.webapp.servlets.HomeServlet;
+import io.muic.ooc.webapp.servlets.LoginServlet;
+import io.muic.ooc.webapp.servlets.LogoutServlet;
 import org.apache.catalina.Context;
 import org.apache.catalina.startup.Tomcat;
 
-import javax.servlet.http.HttpServlet;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ServletRouter {
-    private static final List<Class<? extends AbstractRoutableHttpServlet>> servletClasses = new ArrayList<>();
+    private final List<Class<? extends AbstractRoutableHttpServlet>> servletClasses = new ArrayList<>();
 
-    static{
+    {
         servletClasses.add(HomeServlet.class);
         servletClasses.add(LoginServlet.class);
         servletClasses.add(LogoutServlet.class);

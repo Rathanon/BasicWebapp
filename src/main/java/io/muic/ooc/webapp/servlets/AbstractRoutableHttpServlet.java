@@ -1,4 +1,4 @@
-package io.muic.ooc.webapp;
+package io.muic.ooc.webapp.servlets;
 
 import javax.servlet.http.HttpServlet;
 
