@@ -4,7 +4,6 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class LoginServlet extends AbstractRoutableHttpServlet{
@@ -23,10 +22,7 @@ public class LoginServlet extends AbstractRoutableHttpServlet{
         String error = "";
 
         // authentication
-        if(username!= null && username.equals("mansahej") && password != null && password.equals("12345")){
-            HttpSession session = request.getSession();
-            session.setAttribute("username", username);
-
+        if(securityService.login(request)){
             response.sendRedirect("/");
         } else{
             error = "Username or password incorrect. Please try again.";
