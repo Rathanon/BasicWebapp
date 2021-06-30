@@ -1,5 +1,7 @@
 package io.muic.ooc.webapp.servlets;
 
+import io.muic.ooc.webapp.security.SecurityService;
+import io.muic.ooc.webapp.security.UserService;
 import io.muic.ooc.webapp.servlets.AbstractRoutableHttpServlet;
 import io.muic.ooc.webapp.servlets.HomeServlet;
 import io.muic.ooc.webapp.servlets.LoginServlet;
@@ -21,9 +23,14 @@ public class ServletRouter {
 
     public void init(Context ctx){
 
+        UserService userService = new UserService();
+        SecurityService securityService = new SecurityService();
+        securityService.setUserService(userService);
+
         for (Class<? extends AbstractRoutableHttpServlet> servletClass:servletClasses) {
             try {
                 AbstractRoutableHttpServlet httpServlet = servletClass.newInstance();
+                httpServlet.setSecurityService(securityService);
                 Tomcat.addServlet(ctx, servletClass.getSimpleName(), httpServlet);
                 // TRICK: mapping with index.jsp, allow access to root path "/"
                 ctx.addServletMapping(httpServlet.getPattern(), servletClass.getSimpleName());
